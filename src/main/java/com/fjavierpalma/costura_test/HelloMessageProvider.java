@@ -27,8 +27,7 @@ public class HelloMessageProvider {
     }
 
     public String greetUser(String username) throws NotFoundUserException, SQLException, IOException {
-        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        Connection conn = DriverManager.getConnection("url-database", "username", "password");
+        Connection conn = getConnection();
 
         PreparedStatement stmt = conn.prepareStatement("SELECT name FROM users where username = ?");
         stmt.setString(0, username);
@@ -44,6 +43,11 @@ public class HelloMessageProvider {
 
         conn.close();
         return getMessage(name);
+    }
+
+    protected Connection getConnection() throws SQLException {
+        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        return  DriverManager.getConnection("url-database", "username", "password");
     }
 
 }
