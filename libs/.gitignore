@@ -1,0 +1,2 @@
+#Quitamos ojdbc8 para no incumplir licencias
+ojdbc8.jar
